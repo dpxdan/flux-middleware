@@ -403,6 +403,8 @@ class ApiProxy extends API_Controller {
 											 "creation" => $item["data_cadastro"].' 00:00:00',
 											 "status" => $item["ativo"],
 										 ];
+										 $updateClient = $this->api_model->insert_or_update_cliente($item["id"]);
+//										 $updateClient = $this->processar_cliente($item["id"]);
 									 }
 						 header ( 'Content-Type: application/json');
 						 foreach ($newArray as &$registro) {
