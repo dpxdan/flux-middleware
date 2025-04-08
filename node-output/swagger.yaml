@@ -1,0 +1,210 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "version" : "v1.0.0",
+    "title" : "Flux Middleware Proxy"
+  },
+  "host" : "sbcdev4.flux.net.br:4445",
+  "basePath" : "/",
+  "tags" : [ ],
+  "schemes" : [ "https" ],
+  "paths" : {
+    "/api/login/" : {
+      "post" : {
+        "summary" : "Login",
+        "description" : "###### Esta API serve para realizar Login na API e obter o token.  \n\n\n###### Detalhamento de Parametros :\n\n| Nome do Campo | Descrição | Validações | Tipo |\n| --- | --- | --- | --- |\n| action | Set action list | Set action as defined in description | \\- |\n| username | Set username | Required, Integer | Integer |\n| password | Set password | Required, Varchar | Varchar |\n\n###### Response Parameter Explanation :\n\n| Nome do Campo | Descrição |\n| --- | --- |\n| status | Returns true or false |\n| data | List of all fields in login |\n| success | Success message |\n| response_code | Response code 200 |",
+        "operationId" : "9696d1d3-4fff-4e37-b03b-3b5a88e6226c",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "x_auth_token",
+          "in" : "header",
+          "required" : true,
+          "type" : "string",
+          "default" : "cUFyN0ZHQ3VGelcwSld4dUgySTdwdz09"
+        }, {
+          "name" : "Accept-Encoding",
+          "in" : "header",
+          "required" : false,
+          "type" : "string",
+          "default" : "gzip, zlib, deflate, zstd, br"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "string",
+            "default" : "{\"action\":\"flux_auth_token\",\"username\":\"admin\",\"password\":\"Flux@223304442Dev#2516\"}"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "no response description was provided for this operation"
+          }
+        }
+      }
+    },
+    "/admin/sip_devices/" : {
+      "post" : {
+        "summary" : "Criar Dispositivo SIP",
+        "description" : "###### Esta API é para criação de Dispositivos SIP. It allows creating sip device of same number and username.\n###### Detalhamento de Parametros :\n|Nome do Campo|Descrição    |Validações| Tipo|\n|----------|---------------------|----|------|\n|action|Set action create|Static action as defined in description| -|\n|caller_name|Specify caller name|Not Required| String  |\n|caller_number|Specify caller number|Not Required| Integer|\n|reseller_id|Specify reseller ID|Required, Integer|Integer|\n|accountid|Specify account ID|Integer|Integer|\n|status|Specify status|Not Required(0 = Active, 1 = Inactive)| Integer|\n|sip_profile_id|Specify sip profile id|Not Required, Integer|Integer|\n|voice_mail_enable|Specify voice mail|Not Required(false, true)| String|\n|mailto|Specify mailto|Not Required|String|\n|attach_file|Specify attach file|Not Required(false, true)|String|\n|local_after_email|Specify local after email|Not Required(false, true)|String|\n|send_all_message|Specify send all message|Not Required(false, true)|String|\n\n###### Response Parameter Explanation :\n|Nome do Campo|Descrição|\n|--------------|-----------|\n|status|Returns true or false|\n|data|Returns inserted sip device data|\n|success|Success message|\n|response_code|Response code 200|",
+        "operationId" : "ee6985fa-de2a-487b-98eb-bb48a886d8b9",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "x-auth-token",
+          "in" : "header",
+          "required" : false,
+          "type" : "string",
+          "default" : "cUFyN0ZHQ3VGelcwSld4dUgySTdwdz09"
+        }, {
+          "name" : "Accept-Encoding",
+          "in" : "header",
+          "required" : false,
+          "type" : "string",
+          "default" : "gzip, zlib, deflate, zstd, br"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "string",
+            "default" : "{\"id\":\"1\",\"token\":\"cUFyN0ZHQ3VGelcwSld4dUgySTdwdz09\",\"action\":\"sip_devices_create\",\"caller_number\":\"4792522353\",\"caller_name\":\"4792522353\",\"sip_profile_id\":\"1\",\"accountid\":\"2217\",\"username\":\"4792522353\",\"id_sip_external\":\"15\",\"reseller_id\":\"0\"}"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "no response description was provided for this operation"
+          }
+        }
+      }
+    },
+    "/admin/admin/" : {
+      "post" : {
+        "summary" : "Listar Admins",
+        "description" : "###### Esta API é para listar Dispositivos SIP.\n###### Detalhamento de Parametros :\n|Nome do Campo|Descrição    |Validações|Tipo|\n|----------|---------------------|----|--------|\n|action|Set action list |Set action as defined in description| - |\n|start_limit|Set start limit|Required, Integer, Grater than zero|Integer|\n|end_limit|Set end limit|Required, Integer, Grater than zero|Integer|\n|object_where_params|Set where fields for search(optional)| - | - |\n-|username| - | Integer |\n-|SIP profile ID| - | Integer |\n-|account ID| - | Integer |\n-|status| - | Integer |\n\n###### Response Parameter Explanation :\n|Nome do Campo|Descrição|\n|--------------|-----------|\n|status|Returns true or false|\n|total_count|Returns total count of sip devices|\n|data|List of all sip devices|\n|success|Success message|\n|response_code|Response code 200|",
+        "operationId" : "41de0f9e-c1f6-4cb2-8ce6-55e7cb4538cc",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "flux_auth_token",
+          "in" : "header",
+          "required" : false,
+          "type" : "string",
+          "default" : "cUFyN0ZHQ3VGelcwSld4dUgySTdwdz09"
+        }, {
+          "name" : "Accept-Encoding",
+          "in" : "header",
+          "required" : false,
+          "type" : "string",
+          "default" : "gzip, zlib, deflate, zstd, br"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "string",
+            "default" : "{\"id\":\"1\",\"token\":\"cUFyN0ZHQ3VGelcwSld4dUgySTdwdz09\",\"action\":\"admin_list\",\"start_limit\":\"1\",\"end_limit\":\"10000\"}"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "no response description was provided for this operation"
+          }
+        }
+      }
+    },
+    "/admin/customer/" : {
+      "post" : {
+        "summary" : "Listar Cliente",
+        "description" : "###### Esta API é para listar o Cliente.<br>\n###### Detalhamento de Parametros :\n|Nome do Campo|Descrição|Validações|Tipo|\n|----------|---------------------|----|-----|\n|action|Set action read|Static action as defined in description|-|\n|accountid|Set Account ID|Required|Integer|\n\n###### Response Parameter Explanation :\n|Nome do Campo|Descrição    |           \n|----------|---------------------|\n|status|Returns true or false|\n|data|Gives customer details|\n|success|Success message|\n|response_code|Response code 200|",
+        "operationId" : "1a3a12da-803e-4436-8484-8ee2f67834a1",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "x_auth_token",
+          "in" : "header",
+          "required" : false,
+          "type" : "string",
+          "default" : "cUFyN0ZHQ3VGelcwSld4dUgySTdwdz09"
+        }, {
+          "name" : "Accept-Encoding",
+          "in" : "header",
+          "required" : false,
+          "type" : "string",
+          "default" : "gzip, zlib, deflate, zstd, br"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "string",
+            "default" : "{\"id\":\"1\",\"token\":\"cUFyN0ZHQ3VGelcwSld4dUgySTdwdz09\",\"action\":\"customer_read\",\"accountid\":\"41\",\"email\":\"6emailteste@ixcsoft.com.br\"}"
+          }
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "no response description was provided for this operation"
+          }
+        }
+      }
+    },
+    "/proxy" : {
+      "post" : {
+        "summary" : "API Proxy Listar Contrato",
+        "description" : "",
+        "operationId" : "91fdc583-2b43-4fba-9412-a053311f6545",
+        "consumes" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "ixcsoft",
+          "in" : "header",
+          "required" : false,
+          "type" : "string",
+          "default" : "listar"
+        }, {
+          "name" : "api_endpoint",
+          "in" : "header",
+          "required" : false,
+          "type" : "string",
+          "default" : "cliente_contrato"
+        }, {
+          "name" : "api_provider",
+          "in" : "header",
+          "required" : false,
+          "type" : "string",
+          "default" : "ixc"
+        }, {
+          "name" : "api_account",
+          "in" : "header",
+          "required" : false,
+          "type" : "string",
+          "default" : "ixc"
+        }, {
+          "name" : "Accept-Encoding",
+          "in" : "header",
+          "required" : false,
+          "type" : "string",
+          "default" : "gzip, zlib, deflate, zstd, br"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "string",
+            "default" : "{\"action\":\"forward_api\",\"oper\":\">\",\"page\":\"1\",\"qtype\":\"cliente_contrato.id\",\"query\":\"0\",\"rp\":\"15356\",\"sortname\":\"cliente_contrato.id\",\"sortorder\":\"desc\",\"token\":\"cUFyN0ZHQ3VGelcwSld4dUgySTdwdz09\"}"
+          }
+        } ],
+        "security" : [ {
+          "basic_auth" : [ ]
+        } ],
+        "responses" : {
+          "default" : {
+            "description" : "no response description was provided for this operation"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions" : {
+    "basic_auth" : {
+      "type" : "basic"
+    }
+  },
+  "definitions" : { }
+}
