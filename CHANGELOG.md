@@ -31,7 +31,6 @@ Essas mudanças fornecem uma base sólida para automações e integrações exte
 
 ---
 
-...
 
 ## 💡 Sugestão Estratégica
 
@@ -55,7 +54,6 @@ Para maximizar os benefícios das mudanças implementadas, recomenda-se:
 
 ---
 
-...
 
 ## 📁 Arquivos Alterados e Criados
 
@@ -70,7 +68,6 @@ Essas rotas permitem chamadas para o proxy da API e execução do cron de coleta
 
 ---
 
-...
 
 ### 🧩 signup_lib.php
 
@@ -95,7 +92,6 @@ Array com status (`success`/`fail`) e mensagens operacionais.
 
 ---
 
-...
 
 #### 🔹 `_get_sip_profile_dev()`
 
@@ -112,7 +108,6 @@ Array com dados completos do perfil SIP ou apenas o ID relevante.
 
 ---
 
-...
 
 #### 🔹 `_create_sip_device_dev($accountinfo, $sip_profile_info)`
 
@@ -133,7 +128,6 @@ Booleano ou array de status indicando sucesso/falha.
 
 ---
 
-...
 
 ### 🆕 ApiProxy.php
 
@@ -149,7 +143,6 @@ Controlador responsável por atuar como proxy de requisições entre sistemas ex
 
 ---
 
-...
 
 ### 🆕 ApiCron.php
 
@@ -167,10 +160,8 @@ Executar tarefas automatizadas de coleta de dados através de chamadas agendadas
 
 ---
 
-...
 
 ## ✅ Conclusão
 
 As alterações representam uma evolução importante na arquitetura do Flux Proxy API, possibilitando integração externa via proxy, execução de tarefas automatizadas e suporte ao ambiente de desenvolvimento com provisionamento de contas e dispositivos SIP.
 
-...
