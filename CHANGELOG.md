@@ -3,20 +3,20 @@
 
 ## 📚 Índice
 
-- [Sumário Técnico](#-sumário-técnico)
-- [Sugestão Estratégica](#-sugestão-estratégica)
-- [Arquivos Alterados e Criados](#-arquivos-alterados-e-criados)
-  - [routes.php](#-routesphp)
-  - [signup_lib.php](#-signup_libphp)
-    - [`create_account_dev($accountinfo)`](#-create_account_dev$accountinfo)
-    - [`_get_sip_profile_dev()`](#-_get_sip_profile_dev)
-    - [`_create_sip_device_dev($accountinfo, $sip_profile_info)`](#-_create_sip_device_dev$accountinfo,-$sip_profile_info)
-  - [ApiProxy.php](#-apiproxyphp)
-  - [ApiCron.php](#-apicronphp)
-- [Conclusão](#-conclusão)
+- [✅ Sumário Técnico](#✅-sumário-técnico)
+- [💡 Sugestão Estratégica](#💡-sugestão-estratégica)
+- [📁 Arquivos Alterados e Criados](#📁-arquivos-alterados-e-criados)
+  - [🧩 routes.php](#🧩-routesphp)
+  - [🧩 signup_lib.php](#🧩-signup_libphp)
+    - [🔹 `create_account_dev($accountinfo)`](#🔹-create_account_dev$accountinfo)
+    - [🔹 `_get_sip_profile_dev()`](#🔹-_get_sip_profile_dev)
+    - [🔹 `_create_sip_device_dev($accountinfo, $sip_profile_info)`](#🔹-_create_sip_device_dev$accountinfo,-$sip_profile_info)
+  - [🆕 ApiProxy.php](#🆕-apiproxyphp)
+  - [🆕 ApiCron.php](#🆕-apicronphp)
+- [✅ Conclusão](#✅-conclusão)
 
 
-## Sumário Técnico
+## ✅ Sumário Técnico
 
 O projeto **Flux Proxy API** passou por melhorias estruturais com a introdução de novas rotas, bibliotecas e controladores para aprimorar a integração entre sistemas internos e externos da Flux Telecom.
 
@@ -33,7 +33,7 @@ Essas mudanças fornecem uma base sólida para automações e integrações exte
 
 ...
 
-##  Sugestão Estratégica
+## 💡 Sugestão Estratégica
 
 Para maximizar os benefícios das mudanças implementadas, recomenda-se:
 
@@ -57,9 +57,9 @@ Para maximizar os benefícios das mudanças implementadas, recomenda-se:
 
 ...
 
-## Arquivos Alterados e Criados
+## 📁 Arquivos Alterados e Criados
 
-###  routes.php
+### 🧩 routes.php
 
 Foram adicionadas as seguintes rotas:
 ```php
@@ -72,11 +72,11 @@ Essas rotas permitem chamadas para o proxy da API e execução do cron de coleta
 
 ...
 
-###  signup_lib.php
+### 🧩 signup_lib.php
 
 Foram criadas as seguintes funções:
 
-####  `create_account_dev($accountinfo)`
+#### 🔹 `create_account_dev($accountinfo)`
 
 **Tipo:** `public`  
 **Responsabilidade:**  
@@ -97,7 +97,7 @@ Array com status (`success`/`fail`) e mensagens operacionais.
 
 ...
 
-####  `_get_sip_profile_dev()`
+#### 🔹 `_get_sip_profile_dev()`
 
 **Tipo:** `public`  
 **Responsabilidade:**  
@@ -114,7 +114,7 @@ Array com dados completos do perfil SIP ou apenas o ID relevante.
 
 ...
 
-####  `_create_sip_device_dev($accountinfo, $sip_profile_info)`
+#### 🔹 `_create_sip_device_dev($accountinfo, $sip_profile_info)`
 
 **Tipo:** `public`  
 **Responsabilidade:**  
@@ -135,7 +135,7 @@ Booleano ou array de status indicando sucesso/falha.
 
 ...
 
-###  ApiProxy.php
+### 🆕 ApiProxy.php
 
 **Status:** Arquivo criado do zero.
 
@@ -151,7 +151,7 @@ Controlador responsável por atuar como proxy de requisições entre sistemas ex
 
 ...
 
-###  ApiCron.php
+### 🆕 ApiCron.php
 
 **Status:** Arquivo criado do zero.
 
@@ -169,7 +169,7 @@ Executar tarefas automatizadas de coleta de dados através de chamadas agendadas
 
 ...
 
-## Conclusão
+## ✅ Conclusão
 
 As alterações representam uma evolução importante na arquitetura do Flux Proxy API, possibilitando integração externa via proxy, execução de tarefas automatizadas e suporte ao ambiente de desenvolvimento com provisionamento de contas e dispositivos SIP.
 
