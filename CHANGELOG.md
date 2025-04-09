@@ -1,152 +1,176 @@
-# 📄 Documentação Técnica – Alterações no Projeto **FluxAPI - Proxy**
+
+# 📄 Documentação Técnica – Alterações no Projeto FluxAPI - Proxy
 
 ## 📚 Índice
 
-- [Sumário Técnico](#sumário-técnico)
-- [Sugestão Estratégica](#sugestão-estratégica)
-- [Arquivos Alterados e Criados](#arquivos-alterados-e-criados)
-  - [routes.php](#routesphp)
-  - [signup_lib.php](#signuplibphp)
-    - [create_account_dev($accountinfo)](#create_account_devaccountinfo)
-    - [_get_sip_profile_dev()](#_get_sip_profile_dev)
-    - [_create_sip_device_dev($accountinfo, $sip_profile_info)](#_create_sip_device_devaccountinfo-sip_profile_info)
-  - [ApiProxy.php](#apiproxyphp)
-  - [ApiCron.php](#apicronphp)
-- [Conclusão](#conclusão)
+- [Sumário Técnico](#-sumário-técnico)
+- [Sugestão Estratégica](#-sugestão-estratégica)
+- [Arquivos Alterados e Criados](#-arquivos-alterados-e-criados)
+  - [routes.php](#-routesphp)
+  - [signup_lib.php](#-signup_libphp)
+    - [`create_account_dev($accountinfo)`](#-create_account_dev$accountinfo)
+    - [`_get_sip_profile_dev()`](#-_get_sip_profile_dev)
+    - [`_create_sip_device_dev($accountinfo, $sip_profile_info)`](#-_create_sip_device_dev$accountinfo,-$sip_profile_info)
+  - [ApiProxy.php](#-apiproxyphp)
+  - [ApiCron.php](#-apicronphp)
+- [Conclusão](#-conclusão)
+
+
+## Sumário Técnico
+
+O projeto **Flux Proxy API** passou por melhorias estruturais com a introdução de novas rotas, bibliotecas e controladores para aprimorar a integração entre sistemas internos e externos da Flux Telecom.
+
+As principais mudanças incluem:
+
+- Criação do controlador `ApiProxy`, que permite expor funcionalidades internas da API por meio de um proxy seguro.
+- Implementação do `ApiCron`, responsável por executar rotinas automatizadas como coleta de dados e sincronizações programadas.
+- Extensão da biblioteca `signup_lib` com funções específicas para criação de contas e dispositivos SIP em ambiente de desenvolvimento API.
+- Adição de rotas diretas para facilitar a execução das funcionalidades via URL.
+
+Essas mudanças fornecem uma base sólida para automações e integrações externas com segurança e padronização.
 
 ---
 
-## ✅ Sumário Técnico
+...
 
-O projeto **FluxAPI - Proxy** passou por melhorias estruturais com a introdução de novas rotas, bibliotecas e controladores, com o objetivo de aprimorar a integração entre sistemas internos e externos da **Flux Telecom**.
+##  Sugestão Estratégica
 
-### Principais mudanças:
+Para maximizar os benefícios das mudanças implementadas, recomenda-se:
 
-- Criação do controlador `ApiProxy`, que expõe funcionalidades internas da API por meio de um proxy seguro.
-- Implementação do `ApiCron`, responsável por executar rotinas automatizadas, como coleta de dados e sincronizações agendadas.
-- Extensão da biblioteca `signup_lib` com funções específicas para criação de contas e dispositivos SIP em ambiente de desenvolvimento.
-- Inclusão de rotas dedicadas, facilitando a execução das funcionalidades via chamadas HTTP.
+1. **Monitoramento e Logs:**
+   - Implementar registros detalhados nas execuções do `ApiCron` e chamadas via `ApiProxy`.
+   - Criar um painel básico para visualização de logs e estatísticas de uso.
 
-Essas melhorias estabelecem uma base sólida para automações e integrações externas com foco em **segurança**, **modularidade** e **padronização**.
+2. **Segurança:**
+   - Validar e autenticar todas as requisições que passem pelo `ApiProxy` para evitar uso indevido.
+   - Considerar a inclusão de tokens de acesso ou IP Whitelisting.
 
----
+3. **Escalabilidade:**
+   - Modularizar as rotinas do `ApiCron` em jobs independentes no futuro.
+   - Planejar uma fila de processamento assíncrona caso o volume de requisições aumente.
 
-## 💡 Sugestão Estratégica
-
-Para maximizar os benefícios das alterações, recomenda-se:
-
-1. **Monitoramento e Logs**
-   - Registrar detalhadamente as execuções do `ApiCron` e as chamadas via `ApiProxy`.
-   - Criar um painel simples para exibição de logs e estatísticas.
-
-2. **Segurança**
-   - Validar e autenticar todas as requisições que passam pelo `ApiProxy`.
-   - Considerar o uso de tokens de acesso ou IP Whitelisting.
-
-3. **Escalabilidade**
-   - Modularizar os jobs do `ApiCron` para permitir execuções independentes.
-   - Avaliar o uso de filas assíncronas caso o volume de requisições aumente.
-
-4. **Documentação Técnica Pública (opcional)**
-   - Gerar documentação via Swagger (ou similar) para os endpoints expostos.
-   - Incluir exemplos práticos para facilitar a integração de terceiros.
+4. **Documentação Técnica Pública (opcional):**
+   - Gerar documentação Swagger ou similar para os endpoints expostos pelo proxy.
+   - Facilitar integração de terceiros com exemplos práticos.
 
 ---
 
-## 📁 Arquivos Alterados e Criados
+...
 
-### 🧩 routes.php
+## Arquivos Alterados e Criados
 
-Foram adicionadas as rotas:
+###  routes.php
 
-$route['proxy'] = "ApiProxy/index";  
+Foram adicionadas as seguintes rotas:
+```php
+$route['proxy'] = "ApiProxy/index";
 $route['proxy-cron'] = "ApiCron/GetApiData";
+```
+Essas rotas permitem chamadas para o proxy da API e execução do cron de coleta de dados.
 
 ---
 
-### 🧩 signup_lib.php
+...
 
-#### 🔹 create_account_dev($accountinfo)
+###  signup_lib.php
 
-**Tipo:** public  
-**Responsabilidade:** Orquestra o processo de criação de conta e provisionamento do dispositivo SIP.
+Foram criadas as seguintes funções:
 
-**Fluxo:**
-1. Recebe um array $accountinfo com dados do novo usuário.
-2. Realiza validações internas.
-3. Executa:
-   - _get_sip_profile_dev() para obter o perfil SIP padrão.
-   - _create_sip_device_dev() para provisionar o dispositivo.
-4. Pode realizar persistência em tabelas como: contas, perfis e dispositivos.
+####  `create_account_dev($accountinfo)`
 
-**Retorno:**  
-Array contendo status (success/fail) e mensagens operacionais.
+**Tipo:** `public`  
+**Responsabilidade:**  
+Função principal para orquestrar o processo de criação de conta e provisionamento do dispositivo SIP.
 
----
+**Fluxo Funcional:**
+1. Recebe um array `$accountinfo` com dados do novo usuário (ex: nome, e-mail, número).
+2. Executa validações internas (não detalhadas no trecho).
+3. Chama:
+   - `_get_sip_profile_dev()` para obter perfil SIP padrão.
+   - `_create_sip_device_dev($accountinfo, $sip_profile_info)` para provisionar dispositivo.
+4. Pode incluir persistência em múltiplas tabelas: contas, perfis e dispositivos.
 
-#### 🔹 _get_sip_profile_dev()
-
-**Tipo:** public  
-**Responsabilidade:** Retorna o perfil SIP padrão para novos dispositivos.
-
-**Descrição:**
-- Executa consulta para obter o ID do perfil SIP.
-- Lógica encapsulada permite mudanças sem impacto na criação de contas.
-
-**Retorno:**  
-Array com dados completos do perfil ou apenas o ID.
+**Retorno esperado:**  
+Array com status (`success`/`fail`) e mensagens operacionais.
 
 ---
 
-#### 🔹 _create_sip_device_dev($accountinfo, $sip_profile_info)
+...
 
-**Tipo:** public  
-**Responsabilidade:** Cria e vincula um dispositivo SIP à conta do usuário.
+####  `_get_sip_profile_dev()`
+
+**Tipo:** `public`  
+**Responsabilidade:**  
+Recupera o perfil padrão de SIP para novos dispositivos.
+
+**Funcionalidade técnica:**
+- Executa uma consulta para obter o ID do perfil SIP (geralmente fixo ou baseado em ambiente).
+- Possui lógica encapsulada que facilita alteração futura sem impacto no fluxo de criação de contas.
+
+**Retorno esperado:**  
+Array com dados completos do perfil SIP ou apenas o ID relevante.
+
+---
+
+...
+
+####  `_create_sip_device_dev($accountinfo, $sip_profile_info)`
+
+**Tipo:** `public`  
+**Responsabilidade:**  
+Provisiona um dispositivo SIP no ambiente do usuário utilizando os dados da conta e do perfil SIP.
 
 **Parâmetros:**
-- $accountinfo: Dados da conta.
-- $sip_profile_info: Perfil SIP retornado pela função anterior.
+- `$accountinfo`: Dados da conta do usuário.
+- `$sip_profile_info`: Informações do perfil SIP recuperado anteriormente.
 
-**Descrição técnica:**
-- Gera registros contendo número, nome e vínculo com a conta e reseller.
-- Pode realizar insert em tabela ou integrar com API externa.
+**Funcionalidade técnica:**
+- Gera registros com número, nome, vinculação de conta e reseller.
+- Executa `insert` em tabela de dispositivos (ou integração com API externa).
 
-**Retorno:**  
-Booleano ou array de status (success/fail).
-
----
-
-### 🆕 ApiProxy.php
-
-**Status:** Arquivo novo.  
-**Objetivo:** Controlador que atua como proxy entre sistemas externos e a API interna do FluxSBC.
-
-**Funcionalidades:**
-- Encaminha chamadas para a API interna.
-- Garante tratamento de headers e autenticação.
-- Formata respostas para consumidores externos.
+**Retorno esperado:**  
+Booleano ou array de status indicando sucesso/falha.
 
 ---
 
-### 🆕 ApiCron.php
+...
 
-**Status:** Arquivo novo.  
-**Objetivo:** Executar tarefas automatizadas via chamadas agendadas (cron jobs).
+###  ApiProxy.php
 
-**Rota associada:** proxy-cron  
-**Função principal:** GetApiData()
+**Status:** Arquivo criado do zero.
 
-**Atribuições:**
-- Realiza chamadas a APIs externas.
-- Processa e armazena dados conforme necessário.
+**Objetivo:**  
+Controlador responsável por atuar como proxy de requisições entre sistemas externos e a API interna do FluxSBC. Ele lida com chamadas HTTP, autenticação e redirecionamento de dados.
+
+**Resumo das funcionalidades:**  
+- Encaminhamento de chamadas para APIs internas.
+- Tratamento de headers e autenticação.
+- Resposta formatada para o consumidor externo.
 
 ---
 
-## ✅ Conclusão
+...
 
-As alterações promovidas no projeto **FluxAPI - Proxy** representam um avanço significativo na arquitetura da aplicação, com foco em:
+###  ApiCron.php
 
-- Exposição segura de funcionalidades via proxy.
-- Suporte a tarefas automatizadas.
-- Facilidade de integração com sistemas externos.
-- Robustez no ambiente de desenvolvimento, com provisionamento automatizado de contas e dispositivos.
+**Status:** Arquivo criado do zero.
+
+**Objetivo:**  
+Executar tarefas automatizadas de coleta de dados através de chamadas agendadas.
+
+**Rota associada:** `proxy-cron`
+
+**Função principal:** `GetApiData()`
+- Realiza chamadas à API externa.
+- Processa os dados recebidos.
+- Pode armazenar ou transformar os dados conforme necessidade do sistema.
+
+---
+
+...
+
+## Conclusão
+
+As alterações representam uma evolução importante na arquitetura do Flux Proxy API, possibilitando integração externa via proxy, execução de tarefas automatizadas e suporte ao ambiente de desenvolvimento com provisionamento de contas e dispositivos SIP.
+
+...
