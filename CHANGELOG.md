@@ -1,12 +1,20 @@
 
-# 📄 Documentação Técnica – Alterações no Projeto Flux Proxy API
+# 📄 Documentação Técnica – Alterações no Projeto FluxAPI - Proxy
 
-# 📘 ALTERAÇÕES TÉCNICAS – VERSÃO 1.0.0
-📅 Data de Release: 2025-04-08
+## 📚 Índice
 
-> Este changelog consolida as alterações aplicadas na arquitetura da API CodeIgniter 2, visando modularidade, controle de integração e provisionamento de usuários com dispositivos SIP.
+- [✅ Sumário Técnico](#✅-sumário-técnico)
+- [💡 Sugestão Estratégica](#💡-sugestão-estratégica)
+- [📁 Arquivos Alterados e Criados](#📁-arquivos-alterados-e-criados)
+  - [🧩 routes.php](#🧩-routesphp)
+  - [🧩 signup_lib.php](#🧩-signup_libphp)
+    - [🔹 `create_account_dev($accountinfo)`](#🔹-create_account_dev$accountinfo)
+    - [🔹 `_get_sip_profile_dev()`](#🔹-_get_sip_profile_dev)
+    - [🔹 `_create_sip_device_dev($accountinfo, $sip_profile_info)`](#🔹-_create_sip_device_dev$accountinfo,-$sip_profile_info)
+  - [🆕 ApiProxy.php](#🆕-apiproxyphp)
+  - [🆕 ApiCron.php](#🆕-apicronphp)
+- [✅ Conclusão](#✅-conclusão)
 
----
 
 ## ✅ Sumário Técnico
 
@@ -22,6 +30,8 @@ As principais mudanças incluem:
 Essas mudanças fornecem uma base sólida para automações e integrações externas com segurança e padronização.
 
 ---
+
+...
 
 ## 💡 Sugestão Estratégica
 
@@ -45,7 +55,7 @@ Para maximizar os benefícios das mudanças implementadas, recomenda-se:
 
 ---
 
- – Alterações no Projeto Flux Proxy API
+...
 
 ## 📁 Arquivos Alterados e Criados
 
@@ -60,12 +70,14 @@ Essas rotas permitem chamadas para o proxy da API e execução do cron de coleta
 
 ---
 
+...
+
 ### 🧩 signup_lib.php
 
 Foram criadas as seguintes funções:
 
+#### 🔹 `create_account_dev($accountinfo)`
 
-### 🔹 `create_account_dev($accountinfo)`
 **Tipo:** `public`  
 **Responsabilidade:**  
 Função principal para orquestrar o processo de criação de conta e provisionamento do dispositivo SIP.
@@ -83,7 +95,10 @@ Array com status (`success`/`fail`) e mensagens operacionais.
 
 ---
 
-### 🔹 `_get_sip_profile_dev()`
+...
+
+#### 🔹 `_get_sip_profile_dev()`
+
 **Tipo:** `public`  
 **Responsabilidade:**  
 Recupera o perfil padrão de SIP para novos dispositivos.
@@ -97,7 +112,10 @@ Array com dados completos do perfil SIP ou apenas o ID relevante.
 
 ---
 
-### 🔹 `_create_sip_device_dev($accountinfo, $sip_profile_info)`
+...
+
+#### 🔹 `_create_sip_device_dev($accountinfo, $sip_profile_info)`
+
 **Tipo:** `public`  
 **Responsabilidade:**  
 Provisiona um dispositivo SIP no ambiente do usuário utilizando os dados da conta e do perfil SIP.
@@ -115,6 +133,8 @@ Booleano ou array de status indicando sucesso/falha.
 
 ---
 
+...
+
 ### 🆕 ApiProxy.php
 
 **Status:** Arquivo criado do zero.
@@ -128,6 +148,8 @@ Controlador responsável por atuar como proxy de requisições entre sistemas ex
 - Resposta formatada para o consumidor externo.
 
 ---
+
+...
 
 ### 🆕 ApiCron.php
 
@@ -145,6 +167,10 @@ Executar tarefas automatizadas de coleta de dados através de chamadas agendadas
 
 ---
 
+...
+
 ## ✅ Conclusão
 
 As alterações representam uma evolução importante na arquitetura do Flux Proxy API, possibilitando integração externa via proxy, execução de tarefas automatizadas e suporte ao ambiente de desenvolvimento com provisionamento de contas e dispositivos SIP.
+
+...
